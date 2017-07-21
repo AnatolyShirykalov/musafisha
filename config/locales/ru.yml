@@ -1,0 +1,9 @@
+ru:
+  attributes:
+    is_default: По умолчанию
+  mongoid:
+    models:
+      item: Товар
+    attributes:
+      item:
+        price: Цена

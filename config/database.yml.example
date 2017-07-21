@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: musafisha_development
+  pool: 5
+  host: 'localhost'
+  username: musafisha
+  password: musafisha
+  template: template0
