@@ -1,0 +1,7 @@
+= render @hall
+- @hall.concerts.each do |concert|
+  .row
+    .col-sm-6.text-center
+      = link_to concert.date, concert
+    .col-sm-6.text-center
+      = link_to concert.url,  concert.url

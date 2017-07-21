@@ -20,7 +20,7 @@ class CreateRailsAdminSettings < ActiveRecord::Migration[5.0]
     end
 
     add_index :rails_admin_settings, :key
-    add_index :rails_admin_settings, [:ns, :key], unique: true
+    add_index :rails_admin_settings, %i[ns key], unique: true
   end
 end
 

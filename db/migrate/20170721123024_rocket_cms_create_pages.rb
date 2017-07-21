@@ -34,7 +34,7 @@ class RocketCmsCreatePages < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :pages, :slug, unique: true
-    add_index :pages, [:enabled, :lft]
+    add_index :pages, %i[enabled lft]
 
     create_join_table :menus, :pages
 

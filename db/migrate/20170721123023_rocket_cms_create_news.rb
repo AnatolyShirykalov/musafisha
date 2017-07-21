@@ -20,7 +20,7 @@ class RocketCmsCreateNews < ActiveRecord::Migration[5.0]
     end
 
     add_index :news, :slug, unique: true
-    add_index :news, [:enabled, :time]
+    add_index :news, %i[enabled time]
   end
 end
 

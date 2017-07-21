@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resources :concerts, only: %i[index show]
+  resources :halls, only: %i[index show]
+
+  devise_for :users, controllers: {
+      omniauth_callbacks: "users/omniauth_callbacks",
+  }
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   mount Ckeditor::Engine => '/ckeditor'
 

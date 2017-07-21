@@ -8,7 +8,7 @@ class RocketCmsCreateSeos < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :seos, [:seoable_id, :seoable_type], unique: true
+    add_index :seos, %i[seoable_id seoable_type], unique: true
   end
 end
 

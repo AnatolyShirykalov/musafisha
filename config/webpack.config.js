@@ -95,12 +95,12 @@ var config = {
       $: "jquery/dist/jquery",
       jQuery: "jquery/dist/jquery",
       "window.jQuery": "jquery/dist/jquery",
-      //Tether: "tether",
-      //"window.Tether": "tether",
+      Tether: "tether",
+      "window.Tether": "tether",
       "_": "lodash",
       "window._": "lodash",
-      //Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
-      //Button: "exports-loader?Button!bootstrap/js/dist/button",
+      Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
+      Button: "exports-loader?Button!bootstrap/js/dist/button",
     })
   ]
 };

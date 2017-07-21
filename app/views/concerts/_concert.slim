@@ -1,0 +1,13 @@
+.row
+  = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
+  = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'
+- if concert.image?
+  .row
+    .col-sm-12.text-center
+     = image_tag concert.image
+.row
+  .description [class=concert.site]
+    = concert.description.html_safe
+.row
+  .program [class=concert.site]
+    = concert.program.html_safe

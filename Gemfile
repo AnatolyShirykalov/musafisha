@@ -9,14 +9,20 @@ gem 'rocket_cms_activerecord'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
+gem 'slim-rails'
 gem 'haml'
+gem 'bootstrap4-kaminari-views'
 
 gem 'sass-rails'
 gem 'webpack-rails'
 
+gem 'dalli'
 gem 'devise'
 gem 'devise-i18n'
 gem 'cancancan'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-vkontakte'
 
 gem 'cloner'
 gem 'puma'
@@ -24,18 +30,20 @@ gem 'puma'
 gem 'x-real-ip'
 gem 'sentry-raven'
 
+gem 'rs_russian'
+
 gem 'uglifier'
 
-# windows
-gem 'tzinfo-data' if Gem.win_platform?
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'httpclient'
+
 
 group :development do
+  gem 'annotate'
+  gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'better_errors', github: 'charliesome/better_errors'
   gem 'pry-rails'
   gem 'listen'
-  
+
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
@@ -49,7 +57,7 @@ group :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'email_spec'
-  
+
   gem 'ffaker'
   gem 'factory_girl_rails'
 end

@@ -1,4 +1,11 @@
 ru:
+  activerecord:
+    models:
+      concert:
+        one: '%{count} концерт'
+        few: '%{count} концерта'
+        many: '%{count} концертов'
+        other: концерт
   attributes:
     is_default: По умолчанию
   mongoid:

@@ -25,20 +25,20 @@ module Musafisha
       g.stylesheets false
       g.javascripts false
       g.helper false
-      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
     end
 
     config.i18n.locale = :ru
     config.i18n.default_locale = :ru
-    config.i18n.available_locales = [:ru, :en]
+    config.i18n.available_locales = %i[ru en]
     config.i18n.enforce_available_locales = true
     config.active_record.schema_format = :sql
 
-    config.autoload_paths += %W(#{config.root}/extra)
-    config.eager_load_paths += %W(#{config.root}/extra)
+    config.autoload_paths += %W[#{config.root}/extra]
+    config.eager_load_paths += %W[#{config.root}/extra]
 
     config.time_zone = 'Europe/Moscow'
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.paths << Rails.root.join(*%w[app assets fonts])
   end
 end
 
