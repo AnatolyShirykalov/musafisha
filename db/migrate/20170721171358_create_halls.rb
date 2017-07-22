@@ -6,6 +6,8 @@ class CreateHalls < ActiveRecord::Migration[5.1]
       t.attachment :icon
       t.references :city
 
+      RocketCMS::Migration.map_fields(t)
+
       t.timestamps
     end
   end

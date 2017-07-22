@@ -1,13 +1,18 @@
-.row
-  = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
-  = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'
-- if concert.image?
-  .row
-    .col-sm-12.text-center
-     = image_tag concert.image
-.row
-  .description [class=concert.site]
-    = concert.description.html_safe
-.row
-  .program [class=concert.site]
-    = concert.program.html_safe
+.card
+  .row data-id="#{concert.id}" *next_prev(concert)
+    = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
+    = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'
+  - if concert.image?
+    .row
+      .col-sm-12.text-center
+       = image_tag concert.image, class: "img-fluid"
+  - if concert.description
+    .row
+      .col-sm-12.text-center
+        .description *{class: concert.site}
+          = concert.description.html_safe
+  - if concert.program
+    .row
+      .col-sm-12.text-center
+        .program *{class: concert.site}
+          = concert.program.html_safe

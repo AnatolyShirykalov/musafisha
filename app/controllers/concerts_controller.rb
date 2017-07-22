@@ -1,6 +1,8 @@
 class ConcertsController < ApplicationController
   def index
-    @concerts = Concert.where(concert_params).page(params[:page]).per(20)
+    hs = City.first.halls.pluck(:id)
+    @concerts = Concert.preload(:hall).where(hall_id: hs).order(:date).page(params[:page]).per(20)
+    @map_data = @concerts.map(&:hall).uniq.map{|h| h.to_map.merge({name: h.name})}.to_json
   end
 
   def show

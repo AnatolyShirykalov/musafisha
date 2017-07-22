@@ -119,6 +119,7 @@ CREATE TABLE concerts (
     "row" character varying,
     url character varying,
     site character varying,
+    alltext character varying,
     hall_id bigint,
     image_file_name character varying,
     image_content_type character varying,
@@ -126,6 +127,7 @@ CREATE TABLE concerts (
     image_updated_at timestamp without time zone,
     program character varying,
     description character varying,
+    tsv_body tsvector,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -230,6 +232,13 @@ CREATE TABLE halls (
     icon_file_size integer,
     icon_updated_at timestamp without time zone,
     city_id bigint,
+    address text,
+    map_address text,
+    map_hint text,
+    latitude double precision,
+    longitude double precision,
+    lat double precision,
+    lon double precision,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );
@@ -847,6 +856,13 @@ CREATE INDEX index_concerts_on_hall_id ON concerts USING btree (hall_id);
 
 
 --
+-- Name: index_concerts_on_tsv_body; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_concerts_on_tsv_body ON concerts USING gin (tsv_body);
+
+
+--
 -- Name: index_contact_messages_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -991,6 +1007,13 @@ CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_tok
 --
 
 CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (item_type, item_id);
+
+
+--
+-- Name: concerts tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
+--
+
+CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON concerts FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv_body', 'pg_catalog.simple', 'alltext');
 
 
 --

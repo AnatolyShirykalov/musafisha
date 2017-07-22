@@ -1,3 +1,7 @@
 = paginate @concerts, theme: 'twitter-bootstrap-4'
-= render @concerts
+.row
+  .col-sm-6
+    = render @concerts
+  .col-sm-6.map
+    #map data-array="#{@map_data}"
 = paginate @concerts, theme: 'twitter-bootstrap-4'

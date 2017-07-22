@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.1.1'
 gem 'pg'
+gem 'pg_search'
 
 gem 'sass'
 
@@ -39,7 +40,6 @@ gem 'httpclient'
 
 group :development do
   gem 'annotate'
-  gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'listen'
