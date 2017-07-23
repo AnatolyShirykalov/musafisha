@@ -27,7 +27,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 
 gem 'cloner'
-gem 'puma'
+gem 'puma', '3.8.2'
 
 gem 'x-real-ip'
 gem 'sentry-raven'
