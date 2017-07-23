@@ -1,7 +1,7 @@
 set :user, 'clonclient'
 set :application, 'musafisha'
 
-set :repo_url, 'git@rscz.ru:rocket-station/pricheson.git'
+set :repo_url, 'git@github.com:AnatolyShirykalov/musafisha.git'
 set :branch, ENV["REVISION"] || "master"
 #set :default_env, {
 #  'REDIS_URL' => 'redis://localhost:6379/1'
