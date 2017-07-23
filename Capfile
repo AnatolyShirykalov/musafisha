@@ -1,4 +1,3 @@
- View file @ c18006f0
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'
 
