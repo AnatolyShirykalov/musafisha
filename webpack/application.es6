@@ -8,6 +8,7 @@ import 'vendor/waitforcss'
 
 import NextPrev from 'nextprev'
 import Concert from 'pages/concert'
+import Visits from 'visits'
 
 window.A = {}
 A.errors = new Errors()
@@ -22,5 +23,6 @@ Turbolinks.start()
 
 document.addEventListener("turbolinks:load", function() {
   new Concert()
+  new Visits()
 })
 

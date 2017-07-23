@@ -602,6 +602,39 @@ ALTER SEQUENCE versions_id_seq OWNED BY versions.id;
 
 
 --
+-- Name: visits; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE visits (
+    id bigint NOT NULL,
+    aasm_state character varying,
+    user_id bigint,
+    concert_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: visits_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE visits_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: visits_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE visits_id_seq OWNED BY visits.id;
+
+
+--
 -- Name: cities id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -697,6 +730,13 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 --
 
 ALTER TABLE ONLY versions ALTER COLUMN id SET DEFAULT nextval('versions_id_seq'::regclass);
+
+
+--
+-- Name: visits id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY visits ALTER COLUMN id SET DEFAULT nextval('visits_id_seq'::regclass);
 
 
 --
@@ -825,6 +865,14 @@ ALTER TABLE ONLY users
 
 ALTER TABLE ONLY versions
     ADD CONSTRAINT versions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: visits visits_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY visits
+    ADD CONSTRAINT visits_pkey PRIMARY KEY (id);
 
 
 --
@@ -1010,10 +1058,39 @@ CREATE INDEX index_versions_on_item_type_and_item_id ON versions USING btree (it
 
 
 --
+-- Name: index_visits_on_concert_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_visits_on_concert_id ON visits USING btree (concert_id);
+
+
+--
+-- Name: index_visits_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_visits_on_user_id ON visits USING btree (user_id);
+
+
+--
+-- Name: index_visits_on_user_id_and_concert_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_visits_on_user_id_and_concert_id ON visits USING btree (user_id, concert_id);
+
+
+--
 -- Name: concerts tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
 --
 
 CREATE TRIGGER tsvectorupdate BEFORE INSERT OR UPDATE ON concerts FOR EACH ROW EXECUTE PROCEDURE tsvector_update_trigger('tsv_body', 'pg_catalog.simple', 'alltext');
+
+
+--
+-- Name: visits fk_rails_09e5e7c20b; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY visits
+    ADD CONSTRAINT fk_rails_09e5e7c20b FOREIGN KEY (user_id) REFERENCES users(id);
 
 
 --
@@ -1041,6 +1118,14 @@ ALTER TABLE ONLY menus_pages
 
 
 --
+-- Name: visits fk_rails_e3b0a8c36f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY visits
+    ADD CONSTRAINT fk_rails_e3b0a8c36f FOREIGN KEY (concert_id) REFERENCES concerts(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -1059,6 +1144,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170721123028'),
 ('20170721171240'),
 ('20170721171358'),
-('20170721173037');
+('20170721173037'),
+('20170722200229');
 
 

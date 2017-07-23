@@ -1,0 +1,8 @@
+ul.nav.nav-tabs.justify-content-center.flex-column.flex-sm-row
+  - Visit.aasm.states.map(&:name).map(&:to_s).each do |tab|
+    li.nav-item
+      = link_to I18n.t('activerecord.attributes.visit.aasm_state.'+ tab), url_for(state: tab), class: 'nav-link' + (tab == params[:state] ? ' active' : '')
+
+= paginate @visits, theme: 'twitter-bootstrap-4'
+= render @visits
+= paginate @visits, theme: 'twitter-bootstrap-4'

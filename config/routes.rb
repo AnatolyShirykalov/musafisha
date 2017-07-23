@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  #resources :visits, only: [:index]
+  get 'concerts/:state', to: 'visits#index', constraints: {
+    state: /#{Visit.aasm.states.map(&:name).join("|")}/,
+  }
+
+  post 'visits/set'
+
   resources :concerts, only: %i[index show]
   resources :halls, only: %i[index show]
 

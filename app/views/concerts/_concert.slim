@@ -1,4 +1,10 @@
 .card
+  - if @visits
+    .row
+      .col-sm-12.text-center
+        - visit.aasm.events.each do |event|
+          button.btn.btn-info.aasm data-event=event.name data-id=visit.id
+            = I18n.t("activerecord.attributes.visit.event.#{event.name}")
   .row data-id="#{concert.id}" *next_prev(concert)
     = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
     = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'

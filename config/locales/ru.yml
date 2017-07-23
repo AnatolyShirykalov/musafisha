@@ -6,6 +6,25 @@ ru:
         few: '%{count} концерта'
         many: '%{count} концертов'
         other: концерт
+    attributes:
+      visit:
+        aasm_state:
+          unlooked: Непросмотренные
+          doubt: Отложенное
+          ignored: Смотрел
+          notgo: Пропускаю
+          go: Пойду
+          "on": Слушаю
+          done: Сходил
+          marked: Оценил
+        event:
+          see: Просмотреть
+          defer: Отложить
+          reject: Пропустить
+          agree: Запланировать
+          visit: Отметиться
+          finish: Завершить
+          mark: Оценить
   attributes:
     is_default: По умолчанию
   mongoid:
