@@ -19,7 +19,6 @@ install_plugin Capistrano::Puma
 install_plugin Capistrano::Puma::Workers
 install_plugin Capistrano::Puma::Jungle
 
-require 'hipchat/capistrano'
 
 #require "capistrano-resque"
 
