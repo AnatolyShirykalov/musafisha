@@ -14,7 +14,7 @@ module ApplicationHelper
 
 
   def share_url visit
-    url_for(controller: 'decisions', visit: visit, host: request.host)
+    "http://#{request.domain}/decisions/#{visit.id}"
   end
 
   def share_vk visit
