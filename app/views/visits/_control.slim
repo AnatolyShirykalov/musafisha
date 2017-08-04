@@ -1,8 +1,11 @@
 .row: .col-sm-12.text-center
-  .row: .col.sm-12.text-center
-    = I18n.t("activerecord.attributes.visit.aasm_state.#{my_visit.aasm_state}")
+  .row
+    .col-sm-6.text-right
+      = t("activerecord.attributes.visit.aasm_state.#{my_visit.aasm_state}")
+    .col-sm-6.text-left
+      = link_to 'Поделиться в ВК', share_vk(my_visit), target: '_blank'
   .row: .col-sm-12.text-center
     - my_visit.aasm.events.each do |event|
       button.btn.btn-info.aasm data-event=event.name data-id=my_visit.id
-        = I18n.t("activerecord.attributes.visit.event.#{event.name}")
+        = t("activerecord.attributes.visit.event.#{event.name}")
 
