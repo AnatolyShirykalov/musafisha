@@ -49,4 +49,10 @@ class User < ApplicationRecord
       user.avatar = auth.info.image
     end
   end
+
+  def self.unlooked_visits
+    Concert.where.not(id: visits.pluck(:concert_id)).each do |c|
+      visits.create! concert: c
+    end
+  end
 end

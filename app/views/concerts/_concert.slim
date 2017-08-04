@@ -1,24 +1,21 @@
 .card
-  - if @visits
-    .row
-      .col-sm-12.text-center
-        - visit.aasm.events.each do |event|
-          button.btn.btn-info.aasm data-event=event.name data-id=visit.id
-            = I18n.t("activerecord.attributes.visit.event.#{event.name}")
   .row data-id="#{concert.id}" *next_prev(concert)
     = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
     = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'
   - if concert.image?
-    .row
-      .col-sm-12.text-center
-       = image_tag concert.image, class: "img-fluid"
+    .row: .col-sm-12.text-center
+      = image_tag concert.image, class: 'img-fluid'
   - if concert.description
-    .row
-      .col-sm-12.text-center
-        .description *{class: concert.site}
-          = concert.description.html_safe
+    .row: .col-sm-12.text-center: .description *{class: concert.site}
+      = concert.description.html_safe
   - if concert.program
-    .row
-      .col-sm-12.text-center
-        .program *{class: concert.site}
-          = concert.program.html_safe
+    .row: .col-sm-12.text-center: .program *{class: concert.site}
+      = concert.program.html_safe
+  - if @visits
+    .row: .col.sm-12.text-center
+      = I18n.t("activerecord.attributes.visit.aasm_state.#{visit.aasm_state}")
+    .row: .col-sm-12.text-center
+      - visit.aasm.events.each do |event|
+        button.btn.btn-info.aasm data-event=event.name data-id=visit.id
+          = I18n.t("activerecord.attributes.visit.event.#{event.name}")
+

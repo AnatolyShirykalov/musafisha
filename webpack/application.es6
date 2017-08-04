@@ -7,12 +7,12 @@ import 'bootstrap';
 import 'vendor/waitforcss'
 
 import NextPrev from 'nextprev'
-import Concert from 'pages/concert'
+import Concert from 'concert'
 import Visits from 'visits'
 
 window.A = {}
 A.errors = new Errors()
-
+window.$ = $
 new NextPrev()
 $(function() {
   A.errors.checkCookie();
@@ -21,8 +21,12 @@ $(function() {
 import Turbolinks from "turbolinks";
 Turbolinks.start()
 
-document.addEventListener("turbolinks:load", function() {
-  new Concert()
-  new Visits()
+document.addEventListener("turbolinks:load", (event)=> {
+  switch ($('.page-data').data('controller')){
+    case 'concerts':
+      new Concert(); break;
+    case 'visits':
+      new Visits(); break;
+  }
 })
 

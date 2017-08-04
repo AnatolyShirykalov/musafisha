@@ -1,9 +1,7 @@
 .row.hall data-id="#{hall.id}" data-next_id="#{@next_id}" data-previous_id="#{@previous_id}"
   .col-sm-12.text-center = hall.name
 - if hall.icon?
-  .row
-    .col-sm-12.text-center
-      = image_tag hall.icon
-.row
-  .col-sm-12.text-center
-    = I18n.t("activerecord.models.concert", count: hall.concerts.count)
+  .row: .col-sm-12.text-center
+    = image_tag hall.icon
+.row: .col-sm-12.text-center
+  = I18n.t("activerecord.models.concert", count: hall.concerts.count)

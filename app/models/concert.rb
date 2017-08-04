@@ -59,6 +59,11 @@ class Concert < ApplicationRecord
   has_attached_file :image
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
+  scope :unlooked_for, -> (user) {
+    where("concerts.id IN (SELECT visits.concert_id FROM visits WHERE user_id = ? AND aasm_state = ?)" +
+          " OR concerts.id NOT IN (SELECT visits.concert_id FROM visits WHERE user_id = ?)", user.id, 'unlooked', user.id)
+  }
+
   rails_admin do
     field :hall
     field :date

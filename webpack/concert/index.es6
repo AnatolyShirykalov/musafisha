@@ -1,7 +1,9 @@
 import './_index.sass'
 import ymap from "ymap"
+import Loadmore from 'loadmore'
 export default class Concert {
   constructor(){
+    new Loadmore('#next_concerts', '.card');
     if(this.noneed()) return;
     this.wait().then(()=>{
       this.ymap = this.defaultMap()

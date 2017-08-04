@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  #resources :visits, only: [:index]
-  get 'concerts/:state', to: 'visits#index', constraints: {
-    state: /#{Visit.aasm.states.map(&:name).join("|")}/,
-  }
+
+  constraints(state: /#{Visit.aasm.states.map(&:name).join("|")}/) do
+    get 'decisions/:user_id/:state', to: 'decisions#index'
+    get 'concerts/:state',           to: 'visits#index'
+  end
 
   post 'visits/set'
 

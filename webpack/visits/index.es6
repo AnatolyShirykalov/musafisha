@@ -1,6 +1,11 @@
 import tmpl from "./visit.handlebars"
+import Loadmore from 'loadmore'
 export default class Visits {
   constructor(){
+    console.log('visits-js')
+    new Loadmore('#next_visits', '.card');
+
+
     $('.aasm').click((e)=>{
       let t = $(e.target)
       this.send({id: t.data('id'), event: t.data('event')}).then((r)=>{

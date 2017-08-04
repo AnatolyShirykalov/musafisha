@@ -14,6 +14,9 @@ class Visit < ApplicationRecord
   belongs_to :user
   belongs_to :concert
   include AASM
+
+  scope :personal, lambda { |u| where(user: u) if u}
+
   aasm do
     state :unlooked, initial: true
     state :doubt
@@ -50,6 +53,15 @@ class Visit < ApplicationRecord
 
     event :mark do
       transitions from: :done, to: :marked
+    end
+  end
+
+
+  def self.unlooked_for! user, concerts
+    all = concerts.map(&:id)
+    vs = Visit.where(concert_id: all, user: user, aasm_state: 'unlooked').to_a
+    concerts.map do |c|
+      vs.find{|v| v.concert_id == c.id} or Visit.create! user: user, concert_id: c.id
     end
   end
 end

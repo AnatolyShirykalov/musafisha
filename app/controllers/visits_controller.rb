@@ -1,17 +1,18 @@
 class VisitsController < ApplicationController
   before_action :authenticate_user!
   def index
-    state = params[:state]
-    if state == 'unlooked'
-      Concert.where.not(id: current_user.visits.pluck(:concert_id)).each do |c|
-        current_user.visits.create concert: c
-      end
+    case state
+    when /unlooked/
+      send("get_#{state}")
+    else
+      get_other
     end
-    @visits = current_user.visits.
-      where(aasm_state: state).
-      preload(:concert).
-      page(params[:page]).per(20)
-    @visits.each(&:see!) if state == 'unlooked'
+    if request.xhr?
+      session[:concert_ids] += @visits.map(&:concert_id) if state != 'unlooked'
+      render partial: 'visits/more', layout: false
+      return
+    end
+    session[:concert_ids] = @visits.map(&:concert_id) if state != 'unlooked'
   end
 
   def set
@@ -32,5 +33,28 @@ class VisitsController < ApplicationController
       backtrace: e.backtrace,
       params: params.permit(:id, :event),
     }
+  end
+
+  private
+  def state
+    params[:state]
+  end
+
+  def get_unlooked
+    @concerts = Concert.unlooked_for(current_user).
+      where('date > ?', Time.now).order(:date).limit(10)
+    @visits = Visit.unlooked_for! current_user, @concerts
+    @visits.each(&:see!)
+    session[:concert_ids]=nil
+  end
+
+  def get_other
+    @visits = current_user.visits.joins(:concert).
+      where(aasm_state: state).
+      where('concerts.date >= ?', (params[:date_from] || Time.now)).
+      where(*(params[:date_to] ? ['concerts.date =< ?', params[:date_to]] : [nil])).
+      where(*(request.xhr? ? ['concerts.id NOT IN (?)', session[:concert_ids]] : [nil])).
+      order('concerts.date').
+      preload(:concert).preload(concert: [:hall]).limit(10)
   end
 end
