@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   constraints(state: /#{Visit.aasm.states.map(&:name).join("|")}/) do
-    get 'decisions/:user_id/:state', to: 'decisions#index'
+    get 'decisions/:user_id/:state', to: 'decisions#index', as: :desisions
     get 'concerts/:state',           to: 'visits#index'
   end
 
@@ -9,9 +9,10 @@ Rails.application.routes.draw do
 
   resources :concerts, only: %i[index show]
   resources :halls, only: %i[index show]
+  resources :decisions, only: [:show]
 
   devise_for :users, controllers: {
-      omniauth_callbacks: "users/omniauth_callbacks",
+      omniauth_callbacks: 'users/omniauth_callbacks',
   }
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

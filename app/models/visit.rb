@@ -57,11 +57,15 @@ class Visit < ApplicationRecord
   end
 
 
-  def self.unlooked_for! user, concerts
-    all = concerts.map(&:id)
-    vs = Visit.where(concert_id: all, user: user, aasm_state: 'unlooked').to_a
-    concerts.map do |c|
-      vs.find{|v| v.concert_id == c.id} or Visit.create! user: user, concert_id: c.id
+  def self.where_or_create! opts
+    all = opts[:concerts].map(&:id)
+    vs = Visit.where({concert_id: all}.merge(opts.except(:concerts)))
+    opts[:concerts].map do |c|
+      vs.find{|v| v.concert_id == c.id} or Visit.create! user: opts[:user], concert_id: c.id
     end
+  end
+
+  def self.unlooked_for! user, concerts
+    self.where_or_create! concerts: concerts, user: user
   end
 end

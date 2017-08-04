@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    unless user.nil?
+    if user and user.role == 'admin'
       can :read, :all
       can :manage, :all
       cannot :destroy, Menu

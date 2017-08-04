@@ -18,15 +18,7 @@ class VisitsController < ApplicationController
   def set
     v = Visit.find(params[:id])
     v.send(params[:event] + "!")
-    render json: {
-      events: v.aasm.events.map do |e|
-        {
-          event: e.name,
-          id: params[:id],
-          human: I18n.t("activerecord.attributes.visit.event.#{e.name}"),
-        }
-      end,
-    }
+    render partial: 'control', layout: false, locals: {my_visit: v}
   rescue => e
     render json: {
       error: e.message,

@@ -1,0 +1,5 @@
+- @visits.each do |visit|
+  = render visit.concert, visit: visit,\
+    my_visit: @my_visits.find{|v| v.concert_id == visit.concert_id}
+#next_decisions
+  = link_to_next_page @visits, 'Ещё'

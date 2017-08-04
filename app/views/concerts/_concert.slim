@@ -11,11 +11,6 @@
   - if concert.program
     .row: .col-sm-12.text-center: .program *{class: concert.site}
       = concert.program.html_safe
-  - if @visits
-    .row: .col.sm-12.text-center
-      = I18n.t("activerecord.attributes.visit.aasm_state.#{visit.aasm_state}")
-    .row: .col-sm-12.text-center
-      - visit.aasm.events.each do |event|
-        button.btn.btn-info.aasm data-event=event.name data-id=visit.id
-          = I18n.t("activerecord.attributes.visit.event.#{event.name}")
+  - if user_signed_in?
+    = render 'visits/control', visit: visit, my_visit: my_visit
 

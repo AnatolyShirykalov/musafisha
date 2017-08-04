@@ -1,0 +1,4 @@
+.row: .col-sm-12.text-center
+  = link_to desisions_path(@visit.user, @visit.aasm_state) do
+    = decided(@visit)
+= render @visit.concert, visit: @my_visit

@@ -9,6 +9,7 @@ import 'vendor/waitforcss'
 import NextPrev from 'nextprev'
 import Concert from 'concert'
 import Visits from 'visits'
+import Decisions from 'decisions'
 
 window.A = {}
 A.errors = new Errors()
@@ -26,7 +27,11 @@ document.addEventListener("turbolinks:load", (event)=> {
     case 'concerts':
       new Concert(); break;
     case 'visits':
-      new Visits(); break;
+      new Visits().initFull(); break;
+    case 'decisions':
+      new Visits().initStateUpdater();
+      new Decisions();
+      break;
   }
 })
 
