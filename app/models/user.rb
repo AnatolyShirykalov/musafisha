@@ -33,9 +33,9 @@
 #
 
 class User < ApplicationRecord
-  devise :database_authenticatable, :recoverable,
-         :rememberable, :trackable, :validatable,  :omniauthable,
-         omniauth_providers: %i[facebook vkontakte]
+  devise :database_authenticatable,  :lockable,
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: %i[facebook vkontakte]
   has_many :visits, dependent: :destroy
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
