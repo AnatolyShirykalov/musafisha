@@ -33,7 +33,7 @@
 #
 
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable,
+  devise :database_authenticatable, :recoverable,
          :rememberable, :trackable, :validatable,  :omniauthable,
          omniauth_providers: %i[facebook vkontakte]
   has_many :visits, dependent: :destroy
