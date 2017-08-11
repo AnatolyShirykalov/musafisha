@@ -1,4 +1,4 @@
-set :user, 'clonclient'
+set :user, 'musafisha'
 set :application, 'musafisha'
 
 set :repo_url, 'git@github.com:AnatolyShirykalov/musafisha.git'
