@@ -41,7 +41,7 @@ class User < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.role = 'social'
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
