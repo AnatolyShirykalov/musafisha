@@ -45,8 +45,8 @@ class User < ApplicationRecord
       user.role = 'social'
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
-      user.name = auth.info.name
       user.avatar = auth.info.image if auth.provider.to_s != 'facebook'
+      user.name = auth.info.name
     end
   end
 
