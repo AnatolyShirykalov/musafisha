@@ -8,8 +8,8 @@ module ApplicationHelper
 
   def decided visit
     return "" if visit.nil?
-    "#{visit.user.name} утверждает " +
-      t("activerecord.attributes.visit.aasm_state.#{visit.aasm_state}")
+    "#{visit.user.name} утверждает «" +
+      t("activerecord.attributes.visit.aasm_state.#{visit.aasm_state}") + '»'
   end
 
 
@@ -17,7 +17,7 @@ module ApplicationHelper
     "http://#{request.domain}/decisions/#{visit.id}"
   end
 
-  def share_vk visit
-    "https://vk.com/share.php?url=#{share_url visit}"
+  def share_vk url
+    "https://vk.com/share.php?url=#{url}"
   end
 end

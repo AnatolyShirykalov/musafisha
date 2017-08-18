@@ -18,7 +18,7 @@ class VisitsController < ApplicationController
   def set
     v = Visit.find(params[:id])
     v.send(params[:event] + "!")
-    render partial: 'control', layout: false, locals: {my_visit: v}
+    render partial: 'control', layout: false, locals: {my_visit: v, full: params[:full] == 'true'}
   rescue => e
     render json: {
       error: e.message,

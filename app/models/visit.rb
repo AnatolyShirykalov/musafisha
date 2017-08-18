@@ -68,4 +68,10 @@ class Visit < ApplicationRecord
   def self.unlooked_for! user, concerts
     self.where_or_create! concerts: concerts, user: user
   end
+
+  def event_short_list
+    aasm.events.select do |event|
+      event.name.in? %i[defer reject agree]
+    end
+  end
 end

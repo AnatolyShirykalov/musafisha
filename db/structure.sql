@@ -544,7 +544,8 @@ CREATE TABLE users (
     unlock_token character varying,
     locked_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    slug character varying
 );
 
 
@@ -1145,6 +1146,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170721171240'),
 ('20170721171358'),
 ('20170721173037'),
-('20170722200229');
+('20170722200229'),
+('20170817175848');
 
 

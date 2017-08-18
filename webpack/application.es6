@@ -27,9 +27,9 @@ document.addEventListener("turbolinks:load", (event)=> {
     case 'concerts':
       new Concert(); break;
     case 'visits':
-      new Visits().initFull(); break;
+      new Visits($('.page-data').data('action')).initFull(); break;
     case 'decisions':
-      new Visits().initStateUpdater();
+      new Visits($('.page-data').data('action')).initStateUpdater();
       new Decisions();
       break;
   }

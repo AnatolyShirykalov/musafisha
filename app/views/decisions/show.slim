@@ -1,4 +1,4 @@
 .row: .col-sm-12.text-center
-  = link_to decisions_path(@visit.user, @visit.aasm_state) do
+  = link_to decisions_path(@visit.user.slug, @visit.aasm_state) do
     = decided(@visit)
-= render @visit.concert, my_visit: @my_visit, visit: @visit
+= render @visit.concert, my_visit: @my_visit, visit: @visit, full: true

@@ -1,7 +1,9 @@
 .card
-  .row data-id="#{concert.id}" *next_prev(concert)
-    = link_to concert.date.to_s, concert,      class: 'col-sm-6 text-center'
-    = link_to concert.hall.name, concert.hall, class: 'col-sm-6 text-center'
+  .row.justify-content-center data-id="#{concert.id}" *next_prev(concert)
+    = link_to l(concert.date, format: :long), concert, class: 'col-sm-2 text-center'
+    = link_to concert.hall.name, concert.hall, class: 'col-sm-2 text-center'
+    = link_to 'Смотреть на сайте', concert.url, class: 'col-sm-2 text-center',\
+        target: '_blank'
   - if concert.image?
     .row: .col-sm-12.text-center
       = image_tag concert.image, class: 'img-fluid'
@@ -12,5 +14,5 @@
     .row: .col-sm-12.text-center: .program *{class: concert.site}
       = concert.program.html_safe
   - if user_signed_in?
-    = render 'visits/control', visit: visit, my_visit: my_visit
+    = render 'visits/control', visit: visit, my_visit: my_visit, full: local_assigns[:full]
 

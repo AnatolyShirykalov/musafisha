@@ -1,5 +1,8 @@
 import Loadmore from 'loadmore'
 export default class Visits {
+  constructor(action){
+    this.action = action;
+  }
   initFull(){
     this.initLoadmore();
     this.initStateUpdater();
@@ -10,10 +13,14 @@ export default class Visits {
   initStateUpdater(){
     $('.aasm').click((e)=>{
       let t = $(e.target)
-      t.parent().children().attr('disabled', true);
-      this.send({id: t.data('id'), event: t.data('event')}).then((r)=>{
+      t.closest('.row').find('button').attr('disabled', true);
+      this.send({
+        id: t.data('id'),
+        event: t.data('event'),
+        full: this.action == 'show',
+      }).then((r)=>{
         if (r.error) return console.error(r);
-        t.parent().parent().parent().html(r);
+        t.closest('.row').parent().parent().replaceWith(r);
         this.initStateUpdater();
       }).catch((e)=>{
         t.parent().children().removeAttr('disabled');

@@ -1,11 +1,15 @@
 .row: .col-sm-12.text-center
-  .row
-    .col-sm-6.text-right
-      = t("activerecord.attributes.visit.aasm_state.#{my_visit.aasm_state}")
-    .col-sm-6.text-left
-      = link_to 'Поделиться в ВК', share_vk(my_visit), target: '_blank'
-  .row: .col-sm-12.text-center
-    - my_visit.aasm.events.each do |event|
-      button.btn.btn-info.aasm data-event=event.name data-id=my_visit.id
+  .row.justify-content-center
+    - decis = t("activerecord.attributes.visit.aasm_state.#{my_visit.aasm_state}")
+    .col-sm-2.text-center
+      = link_to decis, decision_path(my_visit)
+    .col-sm-2.text-center
+      = link_to 'Поделиться в ВК', share_vk(decision_url(my_visit)), target: '_blank'
+    .col-sm-2.text-center
+      = link_to "Все мои решения «#{decis}»", decisions_path(current_user.slug, my_visit.aasm_state)
+  .row.justify-content-center
+    - events = local_assigns[:full] ? my_visit.aasm.events : my_visit.event_short_list
+    - events.each do |event|
+      .col-sm-3.col-xs-6: .card: .card-block: button.btn.btn-info.aasm data-event=event.name data-id=my_visit.id
         = t("activerecord.attributes.visit.event.#{event.name}")
 
