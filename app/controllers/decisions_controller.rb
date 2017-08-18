@@ -6,7 +6,10 @@ class DecisionsController < ApplicationController
       where(*(params[:date_to] ? ['concerts.date <= ?', params[:date_to] ] : [nil])).
       preload(concert: [:hall]).order('concerts.date').
       page(params[:page]).per(10)
-    @my_visits = Visit.where(user: current_user, concert_id: @visits.map{|v| v.concert.id}).to_a
+    @my_visits = Visit.where_or_create!(user: current_user, concerts: @visits.map(&:concert))
+    @my_visits.each do |visit|
+      visit.see! if visit.aasm_state == 'unlooked'
+    end
     if request.xhr?
       render partial: 'more', layout: false
       return
