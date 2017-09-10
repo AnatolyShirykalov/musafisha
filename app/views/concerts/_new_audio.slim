@@ -1,0 +1,4 @@
+= simple_form_for concert.audios.new, url: concert_audios_path(concert.id), method: 'POST' do |f|
+  = f.hidden_field :concert_id
+  = f.input :audio
+  = f.button :submit

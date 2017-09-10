@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: pages
+#
+#  id         :integer          not null, primary key
+#  enabled    :boolean          default(TRUE), not null
+#  parent_id  :integer
+#  lft        :integer
+#  rgt        :integer
+#  depth      :integer
+#  name       :string           not null
+#  content    :text
+#  slug       :string           not null
+#  regexp     :string
+#  redirect   :string
+#  fullpath   :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Page < ApplicationRecord
   include RocketCMS::Models::Page
   RocketCMS.apply_patches self

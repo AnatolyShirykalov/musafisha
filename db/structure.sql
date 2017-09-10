@@ -40,6 +40,42 @@ CREATE TABLE ar_internal_metadata (
 
 
 --
+-- Name: audios; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE audios (
+    id bigint NOT NULL,
+    audio_file_name character varying,
+    audio_content_type character varying,
+    audio_file_size integer,
+    audio_updated_at timestamp without time zone,
+    comment character varying,
+    concert_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: audios_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE audios_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: audios_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE audios_id_seq OWNED BY audios.id;
+
+
+--
 -- Name: cities; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -612,7 +648,8 @@ CREATE TABLE visits (
     user_id bigint,
     concert_id bigint,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    content text DEFAULT ''::text NOT NULL
 );
 
 
@@ -633,6 +670,13 @@ CREATE SEQUENCE visits_id_seq
 --
 
 ALTER SEQUENCE visits_id_seq OWNED BY visits.id;
+
+
+--
+-- Name: audios id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY audios ALTER COLUMN id SET DEFAULT nextval('audios_id_seq'::regclass);
 
 
 --
@@ -746,6 +790,14 @@ ALTER TABLE ONLY visits ALTER COLUMN id SET DEFAULT nextval('visits_id_seq'::reg
 
 ALTER TABLE ONLY ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: audios audios_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY audios
+    ADD CONSTRAINT audios_pkey PRIMARY KEY (id);
 
 
 --
@@ -895,6 +947,13 @@ CREATE INDEX idx_ckeditor_assetable_type ON ckeditor_assets USING btree (assetab
 --
 
 CREATE INDEX idx_key ON simple_captcha_data USING btree (key);
+
+
+--
+-- Name: index_audios_on_concert_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_audios_on_concert_id ON audios USING btree (concert_id);
 
 
 --
@@ -1103,6 +1162,14 @@ ALTER TABLE ONLY menus_pages
 
 
 --
+-- Name: audios fk_rails_52fb69049f; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY audios
+    ADD CONSTRAINT fk_rails_52fb69049f FOREIGN KEY (concert_id) REFERENCES concerts(id);
+
+
+--
 -- Name: concerts fk_rails_d13fc46435; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1147,6 +1214,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170721171358'),
 ('20170721173037'),
 ('20170722200229'),
-('20170817175848');
+('20170817175848'),
+('20170903093729'),
+('20170903101041');
 
 

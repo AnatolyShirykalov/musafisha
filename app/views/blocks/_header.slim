@@ -1,7 +1,10 @@
-- menu_slug = user_signed_in? ? ( current_user.role == 'admin' ? :adminus : :common ) : :unauthorized
-= render_navigation &navigation(menu_slug)
-.dropdown
-  button.btn.btn-secondary.dropdown-toggle#dropdownMenuButton type="button" data-toggle='dropdown' aria-haspopup="true" aria-expanded="false" Пользователи
+- @menu_slug = user_signed_in? ? ( current_user.role == 'admin' ? :adminus : :common ) : :unauthorized
+.hidden-sm-down
+  = render_navigation &navigation(@menu_slug)
+- if @visit_navbar
+  = render 'visits/navbar'
+.dropdown.hidden-sm-down
+  button.btn.btn-secondary.dropdown-toggle data-toggle='dropdown' Пользователи
   .dropdown-menu
     - User.find_each do |user|
       = link_to user.name, decisions_path(user.slug, :go), class: 'dropdown-item'

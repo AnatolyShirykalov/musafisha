@@ -12,6 +12,7 @@ class VisitsController < ApplicationController
       render partial: 'visits/more', layout: false
       return
     end
+    @visit_navbar = true
     session[:concert_ids] = @visits.map(&:concert_id) if state != 'unlooked'
   end
 

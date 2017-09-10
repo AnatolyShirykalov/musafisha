@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
   post 'visits/set'
 
-  resources :concerts, only: %i[index show]
+  resources :concerts, only: %i[index show] do
+    resources :audios, only: :create
+  end
   resources :halls, only: %i[index show]
   resources :decisions, only: [:show]
 

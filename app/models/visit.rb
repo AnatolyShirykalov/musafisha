@@ -8,6 +8,7 @@
 #  concert_id :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  content    :text             default(""), not null
 #
 
 class Visit < ApplicationRecord

@@ -1,4 +1,4 @@
-//import 'font-awesome/css/font-awesome.css';
+import 'font-awesome/css/font-awesome.css';
 import 'application.sass';
 import 'rails-ujs';
 import Errors from 'errors';
