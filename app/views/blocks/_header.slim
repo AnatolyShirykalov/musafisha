@@ -1,8 +1,5 @@
 - @menu_slug = user_signed_in? ? ( current_user.role == 'admin' ? :adminus : :common ) : :unauthorized
-.hidden-sm-down
-  = render_navigation &navigation(@menu_slug)
-- if @visit_navbar
-  = render 'visits/navbar'
+= render 'visits/navbar'
 .dropdown.hidden-sm-down
   button.btn.btn-secondary.dropdown-toggle data-toggle='dropdown' Пользователи
   .dropdown-menu

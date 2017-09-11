@@ -14,6 +14,10 @@ class ConcertsController < ApplicationController
 
   def show
     @concert = Concert.find(params[:id])
+    if user_signed_in?
+      @visit = @concert.visits.find_or_create_by(user: current_user)
+      @visit.see! if @visit.aasm_state == 'unlooked'
+    end
   end
 
   private

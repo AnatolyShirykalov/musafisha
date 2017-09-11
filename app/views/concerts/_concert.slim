@@ -18,7 +18,7 @@
       = render partial: 'audio', collection: concert.audios, as: :audio
   - if concert.date.to_date <= Time.now
     .row: .col-sm-12.text-center
-      = render 'new_audio', concert: concert
+      = render 'concerts/new_audio', concert: concert
   - if user_signed_in?
     = render 'visits/control', visit: visit, my_visit: my_visit, full: local_assigns[:full]
 
