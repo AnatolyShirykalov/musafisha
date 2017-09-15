@@ -1,4 +1,5 @@
 = simple_form_for concert.audios.new, url: concert_audios_path(concert.id), method: 'POST' do |f|
   = f.hidden_field :concert_id
-  = f.input :audio
-  = f.button :submit
+  .form-grstom-file-control
+    = f.input :audio, required: true, input_html: {class: 'form-control-file mx-auto d-inline py-3'}
+    = f.button :submit, class: 'btn btn-primary py-2'

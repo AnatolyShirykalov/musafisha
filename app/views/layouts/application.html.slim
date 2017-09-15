@@ -13,7 +13,7 @@ html lang='ru'
     = javascript_include_tag *webpack_asset_paths('application', extension: 'js')
 
   body.no-js
-    = render 'blocks/header'
+    header = render 'blocks/header'
     script.no-js-script
       | document.body.classList.remove('no-js');
     .no-js-error.alert.alert-error

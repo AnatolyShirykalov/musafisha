@@ -6,6 +6,7 @@ import 'flash';
 import 'bootstrap';
 import 'vendor/waitforcss'
 
+window.Popper = Popper
 import NextPrev from 'nextprev'
 import Concert from 'concert'
 import Visits from 'visits'

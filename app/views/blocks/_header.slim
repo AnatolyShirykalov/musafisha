@@ -1,8 +1,39 @@
 - @menu_slug = user_signed_in? ? ( current_user.role == 'admin' ? :adminus : :common ) : :unauthorized
-= render 'visits/navbar'
-.dropdown.hidden-sm-down
-  button.btn.btn-secondary.dropdown-toggle data-toggle='dropdown' Пользователи
-  .dropdown-menu
+- @menu = Menu.find_by(slug: @menu_slug)
+nav.navbar.navbar-expand-md
+  button.navbar-toggler data-toggle="collapse" data-target="#menu"
+    i.fa.fa-bars.fa-2x
+  button.navbar-toggler.navbar-toggler-right data-toggle="collapse" data-target="#users"
+    i.fa.fa-users.fa-2x
+  .collapse.navbar-collapse#menu
+    - main_nav_classes.each do |ul_class, li_class|
+       ul class="#{ul_class}"
+        - @menu.pages.each do |page|
+          li class = "#{li_class}"
+            = link_to page.name, page.fullpath, page_opts(page)
+        - if li_class == 'nav-item px-4' and @visit_navbar
+          li class="nav-item dropdown px-4"
+            a.nav-link.dropdown-toggle data-toggle="dropdown" role="button" Решения
+            .dropdown-menu
+              - Visit.aasm.states.map(&:name).map(&:to_s).each do |tab|
+                = link_to I18n.t('activerecord.attributes.visit.aasm_state.'+ tab),\
+                  url_for(state: tab), class: 'dropdown-item border py-3'
+          li class="nav-item dropdown"
+            a.nav-link.dropdown-toggle data-toggle="dropdown" role="button" Пользователи
+            .dropdown-menu
+              - User.find_each do |user|
+                = link_to user.name, decisions_path(user.slug, :go), class: 'dropdown-item  border py-3'
+
+    - if @visit_navbar
+      - visit_nav_classes.each do |ul_class, li_class|
+         ul class="#{ul_class}"
+          - Visit.aasm.states.map(&:name).map(&:to_s).each do |tab|
+            li class = "#{li_class}"
+              = link_to I18n.t('activerecord.attributes.visit.aasm_state.'+ tab),\
+                url_for(state: tab), \
+                class: 'nav-link' + (tab == params[:state] ? ' active' : '')
+  .navbar-collapse.d-md-none-aesh.collapse#users: ul.nav.d-block.d-md-none
     - User.find_each do |user|
-      = link_to user.name, decisions_path(user.slug, :go), class: 'dropdown-item'
+      li.nav-item.text-center.border.py-3
+        = link_to user.name, decisions_path(user.slug, :go), class: 'nav-link'
 

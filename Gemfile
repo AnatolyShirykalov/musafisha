@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.1'
+gem 'rails', '5.1.4'
 gem 'pg'
 gem 'pg_search'
 gem 'aasm'
@@ -27,7 +27,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 
 gem 'cloner'
-gem 'puma', '3.8.2'
+gem 'puma'
 
 gem 'x-real-ip'
 gem 'sentry-raven'

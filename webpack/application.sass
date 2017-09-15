@@ -1,7 +1,15 @@
 @import "~bootstrap/scss/bootstrap.scss";
+
 html
   font-family: Tahoma, Geneva, sans-serif
   font-size: 14px
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
+
+@media (min-width: 768px)
+  header
+    .navbar-expand-md
+      .d-md-none-aesh
+        display: none !important
+
