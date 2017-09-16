@@ -1,6 +1,7 @@
 import 'font-awesome/css/font-awesome.css';
 import 'application.sass';
-import 'rails-ujs';
+import Rails from 'rails-ujs';
+Rails.start()
 import Errors from 'errors';
 import 'flash';
 import 'bootstrap';
