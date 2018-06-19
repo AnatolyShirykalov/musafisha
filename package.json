@@ -38,6 +38,12 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.3.0",
-    "webpack-hot-middleware": "^2.7.1"
-  }
+    "webpack-hot-middleware": "^2.7.1",
+    "snyk": "^1.83.0"
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
