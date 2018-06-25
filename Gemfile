@@ -7,19 +7,19 @@ gem 'aasm'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.21.0'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
-gem 'slim-rails'
+gem 'slim-rails', '>= 3.1.2'
 gem 'haml'
-gem 'bootstrap4-kaminari-views'
+gem 'bootstrap4-kaminari-views', '>= 1.0.0'
 
-gem 'sass-rails'
-gem 'webpack-rails'
+gem 'sass-rails', '>= 5.0.6'
+gem 'webpack-rails', '>= 0.9.11'
 
 gem 'dalli'
-gem 'devise'
+gem 'devise', '>= 4.3.0'
 gem 'devise-i18n'
 gem 'cancancan'
 gem 'omniauth'
@@ -55,11 +55,11 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.6.1'
   gem 'database_cleaner'
   gem 'email_spec'
 
   gem 'ffaker'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '>= 4.8.0'
 end
 
