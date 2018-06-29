@@ -5,9 +5,9 @@ gem 'pg'
 gem 'pg_search'
 gem 'aasm'
 
-gem 'sass'
+gem 'sass', '>= 3.5.1'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.21.0'
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
@@ -15,7 +15,7 @@ gem 'slim-rails'
 gem 'haml'
 gem 'bootstrap4-kaminari-views'
 
-gem 'sass-rails'
+gem 'sass-rails', '>= 5.0.6'
 gem 'webpack-rails'
 
 gem 'dalli'
@@ -43,7 +43,7 @@ group :development do
   gem 'annotate'
   gem 'binding_of_caller'
   gem 'pry-rails'
-  gem 'listen'
+  gem 'listen', '>= 3.1.5'
 
 
   gem 'capistrano', require: false
