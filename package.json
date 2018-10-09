@@ -4,6 +4,9 @@
   "license": "UNLICENSED",
   "private": true,
   "repository": "git@rscz.ru:rocket-science/musafisha.git",
+  "scripts": {
+    "start": "webpack-dev-server --config config/webpack.config.js --hot --inline"
+  },
   "dependencies": {
     "autoprefixer": "^7.1.1",
     "axios": "^0.16.1",

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.4'
+gem 'rails', '5.1.6'
 gem 'pg'
 gem 'pg_search'
 gem 'aasm'
@@ -19,7 +19,7 @@ gem 'sass-rails'
 gem 'webpack-rails'
 
 gem 'dalli'
-gem 'devise'
+gem 'devise', '~> 4.4'
 gem 'devise-i18n'
 gem 'cancancan'
 gem 'omniauth'
