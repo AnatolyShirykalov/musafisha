@@ -8,6 +8,7 @@ gem 'aasm'
 gem 'sass'
 
 gem 'rocket_cms_activerecord'
+gem 'paper_trail-association_tracking' # need for rocket_cms
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
@@ -37,7 +38,6 @@ gem 'rs_russian'
 gem 'uglifier'
 
 gem 'httpclient'
-
 
 group :development do
   gem 'annotate'
