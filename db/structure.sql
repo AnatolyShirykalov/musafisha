@@ -46,7 +46,7 @@ CREATE TABLE public.audios (
     id bigint NOT NULL,
     audio_file_name character varying,
     audio_content_type character varying,
-    audio_file_size integer,
+    audio_file_size bigint,
     audio_updated_at timestamp without time zone,
     comment character varying,
     concert_id bigint,
@@ -159,7 +159,7 @@ CREATE TABLE public.concerts (
     hall_id bigint,
     image_file_name character varying,
     image_content_type character varying,
-    image_file_size integer,
+    image_file_size bigint,
     image_updated_at timestamp without time zone,
     program character varying,
     description character varying,
@@ -266,7 +266,7 @@ CREATE TABLE public.halls (
     url character varying,
     icon_file_name character varying,
     icon_content_type character varying,
-    icon_file_size integer,
+    icon_file_size bigint,
     icon_updated_at timestamp without time zone,
     city_id bigint,
     address text,
@@ -338,8 +338,8 @@ ALTER SEQUENCE public.menus_id_seq OWNED BY public.menus.id;
 --
 
 CREATE TABLE public.menus_pages (
-    menu_id bigint NOT NULL,
-    page_id bigint NOT NULL
+    menu_id integer NOT NULL,
+    page_id integer NOT NULL
 );
 
 
@@ -357,7 +357,7 @@ CREATE TABLE public.news (
     slug character varying NOT NULL,
     image_file_name character varying,
     image_content_type character varying,
-    image_file_size integer,
+    image_file_size bigint,
     image_updated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -442,7 +442,7 @@ CREATE TABLE public.rails_admin_settings (
     label character varying,
     file_file_name character varying,
     file_content_type character varying,
-    file_file_size integer,
+    file_file_size bigint,
     file_updated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -495,7 +495,7 @@ CREATE TABLE public.seos (
     robots character varying,
     og_image_file_name character varying,
     og_image_content_type character varying,
-    og_image_file_size integer,
+    og_image_file_size bigint,
     og_image_updated_at timestamp without time zone,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -566,7 +566,7 @@ CREATE TABLE public.users (
     name character varying,
     avatar_file_name character varying,
     avatar_content_type character varying,
-    avatar_file_size integer,
+    avatar_file_size bigint,
     avatar_updated_at timestamp without time zone,
     role character varying,
     provider character varying,

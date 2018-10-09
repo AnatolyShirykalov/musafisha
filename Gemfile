@@ -39,6 +39,8 @@ gem 'uglifier'
 
 gem 'httpclient'
 
+gem 'thor'
+
 group :development do
   gem 'annotate'
   gem 'binding_of_caller'

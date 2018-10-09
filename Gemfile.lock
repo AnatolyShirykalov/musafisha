@@ -456,6 +456,7 @@ DEPENDENCIES
   sentry-raven
   slim
   slim-rails
+  thor
   uglifier
   webpack-rails
   x-real-ip
