@@ -14,6 +14,7 @@ module AeshRequest
       puts("status: #{res.status}")
       binding.pry if Rails.env == 'development' and res.status!=500
       return nil if res.status == 500
+      return nil if res.status == 404
       return AeshRequest::get_bin(url, http_client)
     end
     res.body
@@ -124,7 +125,11 @@ module AeshRequest
       @concert.assign_attributes @params
       im = image
       #@concert.imageR = im if im
-      @concert.image = open((base_url+im).to_s) if im
+      if im && (im =~ /data:image\/\w+;base64/) == 0
+        @concert.image = im
+      else
+        @concert.image = open((base_url+im).to_s)
+      end
       @concert.save!
 
     end
