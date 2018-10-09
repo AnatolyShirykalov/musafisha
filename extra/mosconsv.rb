@@ -10,6 +10,7 @@ class Mosconsv < AeshRequest::AfishaParser
 
   def collect_urls
     @doc.css('a').map{|a| a.attr('href')}.select do |url|
+      next if url.nil?
       url.match /\/ru\/concert\.aspx\?id=\d+/
     end
   end
@@ -20,24 +21,42 @@ class Mosconsv < AeshRequest::AfishaParser
   end
 
   def parse
-    a =(@doc.at_css('div[class="afisha-hall dotted-link"]')>('span')>('a'))[0]
+    #a =(@doc.at_css('div[class="afisha-hall dotted-link"]')>('span')>('a'))[0]
+    a = @doc.at_css('.center-afisha-item .afisha-hall')
     @hall_name = a.inner_text
-    @hall_url = (base_url + a.attr('href')).to_s
+    #@hall_url = (base_url + a.attr('href')).to_s
+    @hall_url = nil
     @search_params = {
       site: 'mosconsv',
       url: (base_url + @url).to_s
     }
+
+    program = @doc.at('div.article-text h3:contains("В программе")')&.parent
+    program = no_script(program) if program
+
+    desc = @doc.at_css('div.article-text .col-sm-9 > p')&.parent
+    desc = no_script(desc) if desc
+
+    date = normalize_string(@doc.at_css('.center-afisha-item > .afisha-date')&.inner_text)
+    date = normalize_month(date)
+    date = normalize_weekday(date)
+    time = normalize_string(@doc.at_css('.center-afisha-item .time')&.inner_text)
+
+    date = Time.strptime(date + "T" + time + " +03:00" , "%d %m %AT%H%M %z") if date
+    date = date.instance_of?(Time) ? date : nil
     @params = {
-      program: no_script(@doc.at_css('div[class="afisha-part-body"]')),
-      description: no_script(@doc.at_css('div[class="afisha-desc"]')),
+      program: program,
+      description: desc,
       date: date
     }
   end
 
   def image
-    @doc.css('script').select{|s| s.text.match /showPanel/}.each do |sP|
-       return sP.text.match(/https?:\/\/.*\\\"/)[0][0..-3]
-    end
+    # @doc.css('script').select{|s| s.text.match /showPanel/}.each do |sP|
+    #    return sP.text.match(/https?:\/\/.*\\\"/)[0][0..-3]
+    # end
+    img = @doc.at_css('div.article-text img')
+    return img.attr('src') if img.present?
     return nil
   end
 

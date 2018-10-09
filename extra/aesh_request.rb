@@ -43,6 +43,30 @@ module AeshRequest
   end
 
   class AfishaParser
+    MONTHS = {
+      "января"   => '01',
+      "февраля"  => '02',
+      "марта"    => "03",
+      "апреля"   => "04",
+      "мая"      => "05",
+      "июня"     => "06",
+      "июля"     => "07",
+      "августа"  => "08",
+      "сентября" => "09",
+      "октября"  => "10",
+      "ноября"   => "11",
+      "декабря"  => "12"
+    }
+    DAYNAMES = {
+      "воскресенье" => "Sunday",
+      "понедельник" => "Monday",
+      "вторник"     => "Tuesday",
+      "среда"       => "Wednesday",
+      "четверг"     => "Thursday",
+      "пятница"     => "Friday",
+      "суббота"     => "Saturday"
+    }
+
     def initialize(params = {})
       @direct = params.has_key?(:direct) ? params[:direct] : true
       @region_name = params[:region] || 'Москва'
@@ -50,7 +74,7 @@ module AeshRequest
       @http = HTTPClient.new()
       @http.transparent_gzip_decompression = true
       @doc = nil
-      @date = params[:date] or Date.today
+      @date = params[:date] || Date.today
       @start_url = _start_url
     end
 
@@ -59,6 +83,7 @@ module AeshRequest
       return nil if !start_url # finish
       @start_url = start_url
       @doc = doc_at_utf(@start_url)
+      #binding.pry
       collect_urls.each do |url|
         @count += 1 if concert(url)
         @skip = false
@@ -126,6 +151,31 @@ module AeshRequest
     end
     def image
       nil
+    end
+
+    def normalize_string(str, replace_many_whitespace: true, strip: true, downcase: true, uppercase: false)
+      s = str
+      s = s&.gsub(/\s+/, ' ') if replace_many_whitespace
+      s = s&.strip if strip
+      s = s&.downcase if downcase
+      s = s&.uppercase if uppercase
+      s || ""
+    end
+
+    def normalize_month(datestr)
+      s = datestr
+      MONTHS.each do |key, val|
+        s = s&.gsub(/#{key}/i, val)
+      end
+      s
+    end
+
+    def normalize_weekday(datestr)
+      s = datestr
+      DAYNAMES.each do |key, val|
+        s = s&.gsub(/#{key}/i, val)
+      end
+      s
     end
   end
 # https://ruby-doc.org/stdlib-2.3.0/libdoc/time/rdoc/Time.html#method-c-strptime
