@@ -4,7 +4,7 @@ class Musicatmenlo < AeshRequest::AfishaParser
   end
 
   def _start_url
-    "http://www.musicatmenlo.org/calendar/"
+    "http://www.musicatmenlo.org/"
   end
 
   def next_url
@@ -12,7 +12,7 @@ class Musicatmenlo < AeshRequest::AfishaParser
   end
 
   def collect_urls
-    @doc.css('a[title="more info"]').map{|a| a.attr('href')}
+    @doc.css('div.widget-content-item a[title="read more"]').map{|a| a.attr('href')}
   end
   def parse
     @params = {
@@ -20,26 +20,50 @@ class Musicatmenlo < AeshRequest::AfishaParser
       url: (base_url + @url).to_s
     }
 
-    @search_params = {
-      date: date
-    }
+    @search_params = @params.clone
 
     @doc.at_css('div.venue').css('a').each do |a|
       @hall_url = a.attr('href')
       @hall_name = a.text
     end
 
-    @doc.css('div.widget-content-item').each do |wci|
-      case wci.at_css('h3').text
-      when /Artists?/
-        @params[:description] = wci.inner_html
-      when 'PROGRAM'
-        @params[:program] = wci.inner_html
-      else
-        raise "strange wci.h3.text #{wci.at_css('h3').text}"
-      end
-    end
+    @params[:description] = parse_description
+    @params[:date] = parse_date
 
+    # @doc.css('div.widget-content-item').each do |wci|
+    #   case wci.at_css('h3').text
+    #   when /Artists?/
+    #     @params[:description] = wci.inner_html
+    #   when 'PROGRAM'
+    #     @params[:program] = wci.inner_html
+    #   else
+    #     raise "strange wci.h3.text #{wci.at_css('h3').text}"
+    #   end
+    # end
+
+  end
+
+  def parse_description
+    desc = @doc.at_css('.event-detail-about')
+    no_script(desc)
+  end
+
+  def image
+    img = @doc.at_css('.event-detail-img img')
+    return img.attr('src') if img.present?
+    nil
+  rescue
+    nil
+  end
+
+  def parse_date
+    d = normalize_string(
+      @doc.at_css('.calendar-events-label').inner_text,
+      downcase: false
+    )
+    d = Time.strptime(d , "%A %d%b") if d
+  rescue
+    nil
   end
 
   def date
