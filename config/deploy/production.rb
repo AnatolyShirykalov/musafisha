@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 set :stage, :production
 set :rails_env, :production
+set :user, 'vsobake'
+set :application, 'vsobake'
 
-server '185.22.61.115', user: 'musafisha', roles: %w{web app db}
+server 'vsobake.ru', user: 'vsobake', roles: %w[web app db]
