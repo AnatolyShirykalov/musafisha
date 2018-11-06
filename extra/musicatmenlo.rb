@@ -22,9 +22,12 @@ class Musicatmenlo < AeshRequest::AfishaParser
 
     @search_params = @params.clone
 
-    @doc.at_css('div.venue').css('a').each do |a|
-      @hall_url = a.attr('href')
-      @hall_name = a.text
+    venue_div = @doc.at_css('div.venue')
+    if venue_div
+      venue_div.css('a').each do |a|
+        @hall_url = a.attr('href')
+        @hall_name = a.text
+      end
     end
 
     @params[:description] = parse_description
