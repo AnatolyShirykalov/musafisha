@@ -48,6 +48,7 @@ class SanFranciscoSymphony < AeshRequest::AfishaParser
 
       save!
     end
+    @direct = false
     rescue => e
       raise "parse failed on url #{@url}\n#{e.message}"
     end
