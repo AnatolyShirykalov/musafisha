@@ -128,7 +128,7 @@ module AeshRequest
       if im && (im =~ /data:image\/\w+;base64/) == 0
         @concert.image = im
       else
-        @concert.image = open((base_url+im).to_s)
+        @concert.image = open((base_url+im).to_s) if im.present?
       end
       @concert.save!
 
