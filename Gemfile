@@ -7,30 +7,30 @@ gem 'aasm'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.27.7'
 gem 'paper_trail-association_tracking' # need for rocket_cms
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
-gem 'slim-rails'
+gem 'slim-rails', '>= 3.2.0'
 gem 'haml'
-gem 'bootstrap4-kaminari-views'
+gem 'bootstrap4-kaminari-views', '>= 1.0.0'
 
-gem 'sass-rails'
-gem 'webpack-rails'
+gem 'sass-rails', '>= 5.0.7'
+gem 'webpack-rails', '>= 0.9.11'
 
 gem 'dalli'
-gem 'devise', '~> 4.4'
-gem 'devise-i18n'
+gem 'devise', '~> 4.5', '>= 4.5.0'
+gem 'devise-i18n', '>= 1.6.5'
 gem 'cancancan'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
+gem 'omniauth', '>= 1.8.1'
+gem 'omniauth-facebook', '>= 5.0.0'
+gem 'omniauth-vkontakte', '>= 1.4.1'
 
 gem 'cloner'
 gem 'puma'
 
-gem 'x-real-ip'
+gem 'x-real-ip', '>= 0.2.1'
 gem 'sentry-raven'
 
 gem 'rs_russian'
@@ -57,11 +57,11 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 3.8.0'
   gem 'database_cleaner'
   gem 'email_spec'
 
   gem 'ffaker'
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '>= 4.9.0'
 end
 
