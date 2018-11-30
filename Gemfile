@@ -1,20 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.6'
+gem 'rails', '5.1.6.1'
 gem 'pg'
 gem 'pg_search'
 gem 'aasm'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.27.7'
 gem 'paper_trail-association_tracking' # need for rocket_cms
 gem 'rails_admin', github: 'crowdtask/rails_admin'
 
 gem 'slim'
 gem 'slim-rails'
 gem 'haml'
-gem 'bootstrap4-kaminari-views'
+gem 'bootstrap4-kaminari-views', '>= 1.0.0'
 
 gem 'sass-rails'
 gem 'webpack-rails'
