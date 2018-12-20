@@ -1,37 +1,39 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
-gem 'rails', '5.1.6'
+gem 'aasm'
 gem 'pg'
 gem 'pg_search'
-gem 'aasm'
+gem 'rails', '5.2.2'
 
 gem 'sass'
 
-gem 'rocket_cms_activerecord'
 gem 'paper_trail-association_tracking' # need for rocket_cms
-gem 'rails_admin', github: 'crowdtask/rails_admin'
+gem 'rails_admin'
+gem 'rocket_cms_activerecord'
 
+gem 'bootstrap4-kaminari-views'
+gem 'haml'
 gem 'slim'
 gem 'slim-rails'
-gem 'haml'
-gem 'bootstrap4-kaminari-views'
 
 gem 'sass-rails'
 gem 'webpack-rails'
 
-gem 'dalli'
-gem 'devise', '~> 4.4'
-gem 'devise-i18n'
 gem 'cancancan'
+gem 'dalli'
+gem 'devise'
+gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 
 gem 'cloner'
-gem 'puma'
+gem 'puma', github: 'AnatolyShirykalov/puma'
 
-gem 'x-real-ip'
 gem 'sentry-raven'
+gem 'x-real-ip'
 
 gem 'rs_russian'
 
@@ -44,24 +46,22 @@ gem 'thor'
 group :development do
   gem 'annotate'
   gem 'binding_of_caller'
-  gem 'pry-rails'
   gem 'listen'
-
+  gem 'pry-rails'
 
   gem 'capistrano', require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma', require: false
   gem 'capistrano-rails', require: false
+  gem 'capistrano3-puma', require: false
 
   gem 'hipchat'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'email_spec'
+  gem 'rspec-rails'
 
-  gem 'ffaker'
   gem 'factory_girl_rails'
+  gem 'ffaker'
 end
-

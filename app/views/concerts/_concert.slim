@@ -6,7 +6,7 @@
     = link_to 'Смотреть на сайте', concert.url, class: kls, target: '_blank'
   - if concert.image?
     .row: .col-sm-12.text-center
-      = image_tag concert.image, class: 'img-fluid'
+      = image_tag concert.image.url, class: 'img-fluid'
   - if concert.description
     .row: .col-sm-12.text-center: .description *{class: concert.site}
       = concert.description.html_safe

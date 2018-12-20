@@ -2,6 +2,6 @@
   .col-sm-12.text-center = hall.name
 - if hall.icon?
   .row: .col-sm-12.text-center
-    = image_tag hall.icon
+    = image_tag hall.icon.url
 .row: .col-sm-12.text-center
   = I18n.t("activerecord.models.concert", count: hall.concerts.count)
