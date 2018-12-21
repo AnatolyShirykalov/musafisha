@@ -6,6 +6,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def vkontakte
     omniauth_registration :vkontakte
   end
+  def google_oauth2
+    omniauth_registration :vkontakte
+  end
 
   protected
   def omniauth_registration provider
@@ -18,8 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication
       set_flash_message(:notice, :success, kind: provider.to_s) if is_navigational_format?
     else
-      session["devise.facebook_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
+      session["devise.#{provider}_data"] = request.env["omniauth.auth"].except(:extra)
+      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
   end
 

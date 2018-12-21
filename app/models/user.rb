@@ -37,16 +37,18 @@ class User < ApplicationRecord
   extend FriendlyId
   devise :database_authenticatable,  :lockable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook vkontakte]
+         :omniauthable, omniauth_providers: %i[facebook vkontakte google_oauth2]
   friendly_id :name, use: :slugged
   has_many :visits, dependent: :destroy
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+    #where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+    where(email: auth.info.email).first_or_create! do |user|
       user.role = 'social'
-      user.email = auth.info.email
+      user.provider = auth.provider
+      user.uid = auth.uid
       user.password = Devise.friendly_token[0, 20]
       #user.avatar = auth.info.image if auth.provider.to_s != 'facebook'
       user.name = auth.info.name

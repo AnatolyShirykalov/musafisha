@@ -28,6 +28,7 @@ gem 'devise-i18n'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'omniauth-google-oauth2'
 
 gem 'cloner'
 gem 'puma', github: 'AnatolyShirykalov/puma'
