@@ -5,6 +5,11 @@ class ConcertsController < ApplicationController
       where('date >= ?', (params[:date_from] || Time.now)).
       where(*(params[:date_to] ? ['date <= ?', params[:date_to]] : [nil])).
       order(:date).page(params[:page]).per(10)
+    if user_signed_in?
+      @visits = Visit.unlooked_for! current_user, @concerts
+      @visits.select{|v| v.unlooked? }.each(&:see!)
+      @visit_navbar = true
+    end
     if request.xhr?
       render partial: 'more', layout: false
       return

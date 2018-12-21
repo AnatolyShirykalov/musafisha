@@ -6,11 +6,11 @@ export default class Concert {
     new Loadmore('#next_concerts', '.card');
     if(this.noneed()) return;
     this.wait().then(()=>{
-      this.ymap = this.defaultMap()
-      this.div.addClass('done')
-      let adds = this.addresses()
-      this.addObjects(adds)
-      this.center(adds)
+      //this.ymap = this.defaultMap()
+      //this.div.addClass('done')
+      //let adds = this.addresses()
+      //this.addObjects(adds)
+      //this.center(adds)
     })
   }
   defaultCoords(){

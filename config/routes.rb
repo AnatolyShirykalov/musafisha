@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   constraints(state: /#{Visit.aasm.states.map(&:name).join("|")}/) do
     get 'decisions/:user/:state', to: 'decisions#index', as: :decisions
-    get 'concerts/:state',        to: 'visits#index'
+    get 'concerts/:state',        to: 'visits#index', as: :visits
   end
 
   post 'visits/set'

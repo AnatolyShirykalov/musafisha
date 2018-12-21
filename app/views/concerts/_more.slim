@@ -1,3 +1,6 @@
-= render @concerts
+- if user_signed_in?
+  = render @visits
+- else
+  = render @concerts
 #next_concerts
   = link_to_next_page @concerts, 'Ещё'

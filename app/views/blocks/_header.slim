@@ -17,7 +17,7 @@ nav.navbar.navbar-expand-md
             .dropdown-menu
               - Visit.aasm.states.map(&:name).map(&:to_s).each do |tab|
                 = link_to I18n.t('activerecord.attributes.visit.aasm_state.'+ tab),\
-                  url_for(state: tab), class: 'dropdown-item border py-3'
+                  visits_path(state: tab), class: 'dropdown-item border py-3'
           li class="nav-item dropdown"
             a.nav-link.dropdown-toggle data-toggle="dropdown" role="button" Пользователи
             .dropdown-menu
@@ -30,7 +30,7 @@ nav.navbar.navbar-expand-md
           - Visit.aasm.states.map(&:name).map(&:to_s).each do |tab|
             li class = "#{li_class}"
               = link_to I18n.t('activerecord.attributes.visit.aasm_state.'+ tab),\
-                url_for(state: tab), \
+                visits_path(state: tab), \
                 class: 'nav-link' + (tab == params[:state] ? ' active' : '')
   .navbar-collapse.d-md-none-aesh.collapse#users: ul.nav.d-block.d-md-none
     - User.find_each do |user|
