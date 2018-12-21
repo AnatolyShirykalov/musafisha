@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     omniauth_registration :vkontakte
   end
   def google_oauth2
-    omniauth_registration :vkontakte
+    omniauth_registration :google_oauth2
   end
 
   protected
