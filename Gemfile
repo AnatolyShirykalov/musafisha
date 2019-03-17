@@ -11,7 +11,7 @@ gem 'sass'
 
 gem 'paper_trail-association_tracking' # need for rocket_cms
 gem 'rails_admin'
-gem 'rocket_cms_activerecord'
+gem 'rocket_cms_activerecord', '>= 0.27.8'
 
 gem 'bootstrap4-kaminari-views'
 gem 'haml'
@@ -23,8 +23,8 @@ gem 'webpack-rails'
 
 gem 'cancancan'
 gem 'dalli'
-gem 'devise'
-gem 'devise-i18n'
+gem 'devise', '>= 4.6.0'
+gem 'devise-i18n', '>= 1.7.0'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
