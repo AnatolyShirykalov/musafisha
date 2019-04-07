@@ -57,6 +57,17 @@ var config = {
           { test: /\.handlebars$/, use: "handlebars-loader" },
           { test: /\.(jpe?g|png|gif)$/i, use: "file-loader" },
           {
+            test: /\.pug/,
+            use: [
+              {
+                loader: 'babel-loader'
+              },
+              {
+                loader: 'pug-loader'
+              }
+            ]
+          },
+          {
             test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
             use: production ? 'file-loader' : 'url-loader'
           },

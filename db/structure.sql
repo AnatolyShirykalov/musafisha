@@ -8,6 +8,20 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -129,6 +143,40 @@ CREATE SEQUENCE public.ckeditor_assets_id_seq
 --
 
 ALTER SEQUENCE public.ckeditor_assets_id_seq OWNED BY public.ckeditor_assets.id;
+
+
+--
+-- Name: concert_tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.concert_tags (
+    id bigint NOT NULL,
+    concert_id bigint,
+    composer_id bigint,
+    piece_id bigint,
+    performer_id bigint,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: concert_tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.concert_tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: concert_tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.concert_tags_id_seq OWNED BY public.concert_tags.id;
 
 
 --
@@ -542,6 +590,73 @@ ALTER SEQUENCE public.simple_captcha_data_id_seq OWNED BY public.simple_captcha_
 
 
 --
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.taggings (
+    id integer NOT NULL,
+    tag_id integer,
+    taggable_type character varying,
+    taggable_id integer,
+    tagger_type character varying,
+    tagger_id integer,
+    context character varying(128),
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.taggings_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: taggings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.taggings_id_seq OWNED BY public.taggings.id;
+
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.tags (
+    id integer NOT NULL,
+    name character varying,
+    taggings_count integer DEFAULT 0
+);
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.tags_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.tags_id_seq OWNED BY public.tags.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -687,6 +802,13 @@ ALTER TABLE ONLY public.ckeditor_assets ALTER COLUMN id SET DEFAULT nextval('pub
 
 
 --
+-- Name: concert_tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.concert_tags ALTER COLUMN id SET DEFAULT nextval('public.concert_tags_id_seq'::regclass);
+
+
+--
 -- Name: concerts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -757,6 +879,20 @@ ALTER TABLE ONLY public.simple_captcha_data ALTER COLUMN id SET DEFAULT nextval(
 
 
 --
+-- Name: taggings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings ALTER COLUMN id SET DEFAULT nextval('public.taggings_id_seq'::regclass);
+
+
+--
+-- Name: tags id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags ALTER COLUMN id SET DEFAULT nextval('public.tags_id_seq'::regclass);
+
+
+--
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -807,6 +943,14 @@ ALTER TABLE ONLY public.cities
 
 ALTER TABLE ONLY public.ckeditor_assets
     ADD CONSTRAINT ckeditor_assets_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: concert_tags concert_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.concert_tags
+    ADD CONSTRAINT concert_tags_pkey PRIMARY KEY (id);
 
 
 --
@@ -898,6 +1042,22 @@ ALTER TABLE ONLY public.simple_captcha_data
 
 
 --
+-- Name: taggings taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.taggings
+    ADD CONSTRAINT taggings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: tags tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -947,6 +1107,34 @@ CREATE INDEX idx_key ON public.simple_captcha_data USING btree (key);
 --
 
 CREATE INDEX index_audios_on_concert_id ON public.audios USING btree (concert_id);
+
+
+--
+-- Name: index_concert_tags_on_composer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_concert_tags_on_composer_id ON public.concert_tags USING btree (composer_id);
+
+
+--
+-- Name: index_concert_tags_on_concert_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_concert_tags_on_concert_id ON public.concert_tags USING btree (concert_id);
+
+
+--
+-- Name: index_concert_tags_on_performer_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_concert_tags_on_performer_id ON public.concert_tags USING btree (performer_id);
+
+
+--
+-- Name: index_concert_tags_on_piece_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_concert_tags_on_piece_id ON public.concert_tags USING btree (piece_id);
 
 
 --
@@ -1069,6 +1257,62 @@ CREATE UNIQUE INDEX index_seos_on_seoable_id_and_seoable_type ON public.seos USI
 
 
 --
+-- Name: index_taggings_on_context; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_context ON public.taggings USING btree (context);
+
+
+--
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_tag_id ON public.taggings USING btree (tag_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_taggable_id ON public.taggings USING btree (taggable_id);
+
+
+--
+-- Name: index_taggings_on_taggable_id_and_taggable_type_and_context; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_taggable_id_and_taggable_type_and_context ON public.taggings USING btree (taggable_id, taggable_type, context);
+
+
+--
+-- Name: index_taggings_on_taggable_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_taggable_type ON public.taggings USING btree (taggable_type);
+
+
+--
+-- Name: index_taggings_on_tagger_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_tagger_id ON public.taggings USING btree (tagger_id);
+
+
+--
+-- Name: index_taggings_on_tagger_id_and_tagger_type; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_taggings_on_tagger_id_and_tagger_type ON public.taggings USING btree (tagger_id, tagger_type);
+
+
+--
+-- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_tags_on_name ON public.tags USING btree (name);
+
+
+--
 -- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -1132,6 +1376,20 @@ CREATE UNIQUE INDEX index_visits_on_user_id_and_concert_id ON public.visits USIN
 
 
 --
+-- Name: taggings_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX taggings_idx ON public.taggings USING btree (tag_id, taggable_id, taggable_type, context, tagger_id, tagger_type);
+
+
+--
+-- Name: taggings_idy; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX taggings_idy ON public.taggings USING btree (taggable_id, taggable_type, tagger_id, context);
+
+
+--
 -- Name: concerts tsvectorupdate; Type: TRIGGER; Schema: public; Owner: -
 --
 
@@ -1152,6 +1410,14 @@ ALTER TABLE ONLY public.visits
 
 ALTER TABLE ONLY public.menus_pages
     ADD CONSTRAINT fk_rails_2d8026bba5 FOREIGN KEY (page_id) REFERENCES public.pages(id) ON DELETE CASCADE;
+
+
+--
+-- Name: concert_tags fk_rails_30fdf8e4e0; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.concert_tags
+    ADD CONSTRAINT fk_rails_30fdf8e4e0 FOREIGN KEY (concert_id) REFERENCES public.concerts(id);
 
 
 --
@@ -1209,6 +1475,13 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20170722200229'),
 ('20170817175848'),
 ('20170903093729'),
-('20170903101041');
+('20170903101041'),
+('20190407165331'),
+('20190407165332'),
+('20190407165333'),
+('20190407165334'),
+('20190407165335'),
+('20190407165336'),
+('20190407170028');
 
 

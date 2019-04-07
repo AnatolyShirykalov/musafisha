@@ -23,6 +23,7 @@ $(function() {
 
 import Turbolinks from "turbolinks";
 Turbolinks.start()
+import './tags'
 
 document.addEventListener("turbolinks:load", (event)=> {
   switch ($('.page-data').data('controller')){
@@ -36,4 +37,8 @@ document.addEventListener("turbolinks:load", (event)=> {
       break;
   }
 })
-
+import axios from "axios";
+axios.defaults.headers.common["X-CSRF-Token"] = document.querySelector(
+  "meta[name=csrf-token]"
+).content;
+axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";

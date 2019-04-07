@@ -1,0 +1,6 @@
+.row.js-concert__tags: .col-12.text-center
+  h4.h4 Тэги
+  form
+    = render 'concerts/tag', concert: concert, kind: 'composers'
+    = render 'concerts/tag', concert: concert, kind: 'pieces'
+    = render 'concerts/tag', concert: concert, kind: 'performers'

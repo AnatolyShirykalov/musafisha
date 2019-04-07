@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :visits, dependent: :destroy
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  acts_as_tagger
 
   def self.from_omniauth(auth)
     #where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|

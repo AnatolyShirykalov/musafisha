@@ -26,8 +26,10 @@ class Concert < ApplicationRecord
   before_validation :searcheable!
   belongs_to :hall
   has_many :visits, dependent: :destroy
-  has_many :audios
+  has_many :audios, dependent: :destroy
+  has_many :concert_tags, dependent: :destroy
 
+  acts_as_taggable
 
   def searcheable!
     globalize_links!

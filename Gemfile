@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'aasm'
 gem 'pg'
 gem 'pg_search'
-gem 'rails', '5.2.2'
+gem 'rails', '5.2.3'
 
 gem 'sass'
 
@@ -66,3 +66,9 @@ group :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
 end
+
+gem "irb", "~> 1.0"
+
+gem "searchkick", "~> 3.1"
+
+gem "acts-as-taggable-on", "~> 6.0"

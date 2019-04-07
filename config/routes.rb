@@ -27,6 +27,15 @@ Rails.application.routes.draw do
   #get 'search' => 'search#index', as: :search
 
   #resources :news, only: [:index, :show]
+  namespace :api do
+    get 'search/composers'
+    get 'search/pieces'
+    get 'search/performers'
+    get 'search', to: 'search#index'
+    resources :concerts, only: [] do
+      resources :concert_tags, only: %i[index create destroy]
+    end
+  end
 
   root to: 'home#index'
 

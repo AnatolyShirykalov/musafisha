@@ -1,0 +1,6 @@
+- items = concert.concert_tags.to_a.select(&kind.to_sym)
+- if items.size > 0
+  .col-sm-3
+    ul class="js-#{kind.to_s.pluralize}-for-concert-#{concert.id}"
+      - items.each do |item|
+        li = item.send(kind)&.name

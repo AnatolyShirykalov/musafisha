@@ -19,6 +19,11 @@
   - if concert.date.to_date <= Time.now
     .row: .col-sm-12.text-center
       = render 'concerts/new_audio', concert: concert
+
+  .row: .col-sm-12.text-center class="js-concert-tags-for-#{concert.id}"
+  = render 'concerts/concert_tags', concert: concert
   - if user_signed_in?
     = render 'visits/control', visit: visit, my_visit: my_visit, full: local_assigns[:full]
+    - if can? :update, concert
+      = render 'concerts/tags', concert: concert
 

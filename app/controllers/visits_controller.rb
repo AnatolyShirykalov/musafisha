@@ -35,6 +35,7 @@ class VisitsController < ApplicationController
 
   def get_unlooked
     @concerts = Concert.unlooked_for(current_user).
+      preload(concert_tags: %i[composer piece performer]).
       where('date > ?', Time.now).order(:date).limit(10)
     @visits = Visit.unlooked_for! current_user, @concerts
     @visits.each(&:see!)
@@ -48,6 +49,6 @@ class VisitsController < ApplicationController
       where(*(params[:date_to] ? ['concerts.date =< ?', params[:date_to]] : [nil])).
       where(*(request.xhr? ? ['concerts.id NOT IN (?)', session[:concert_ids]] : [nil])).
       order('concerts.date').
-      preload(:concert).preload(concert: [:hall]).limit(10)
+      preload(concert: [:hall, concert_tags: %i[composer piece performer]]).limit(10)
   end
 end

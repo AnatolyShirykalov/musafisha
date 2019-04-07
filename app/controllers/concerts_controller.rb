@@ -2,6 +2,7 @@ class ConcertsController < ApplicationController
   def index
     hs = City.first.halls.pluck(:id)
     @concerts = Concert.preload(:hall).where(hall_id: hs).
+      preload(concert_tags: %i[composer piece performer]).
       where('date >= ?', (params[:date_from] || Time.now)).
       where(*(params[:date_to] ? ['date <= ?', params[:date_to]] : [nil])).
       order(:date).page(params[:page]).per(10)

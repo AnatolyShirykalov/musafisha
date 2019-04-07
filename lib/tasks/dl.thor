@@ -18,10 +18,6 @@ class Dl < Cloner::Base
       'vsobake'
     end
 
-    def pg_remote_bin_path(util)
-      '/usr/lib/postgresql/10/bin/'+ util
-    end
-
     def remote_dump_path
       "/home/#{ssh_user}/app/shared/db_backup"
     end
