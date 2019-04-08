@@ -24,8 +24,17 @@ $(function() {
 import Turbolinks from "turbolinks";
 Turbolinks.start()
 import './tags'
+import 'magnific-popup';
+import 'magnific-popup/dist/magnific-popup.css';
 
 document.addEventListener("turbolinks:load", (event)=> {
+  $('.js-concert-image').magnificPopup({
+      type: 'image',
+      image: {
+        verticalFit: false,
+      },
+      closeOnContentClick: true,
+    })
   switch ($('.page-data').data('controller')){
     case 'concerts':
       new Concert(); break;

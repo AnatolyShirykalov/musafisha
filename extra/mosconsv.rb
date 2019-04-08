@@ -55,7 +55,9 @@ class Mosconsv < AeshRequest::AfishaParser
     # @doc.css('script').select{|s| s.text.match /showPanel/}.each do |sP|
     #    return sP.text.match(/https?:\/\/.*\\\"/)[0][0..-3]
     # end
+    og = @doc.at_css('meta[property="og:image"]')
     img = @doc.at_css('div.article-text img')
+    return og.attr('content') if og.present?
     return img.attr('src') if img.present?
     return nil
   end

@@ -36,6 +36,7 @@ class Dl < Cloner::Base
   def download
     load_env
     @from = @options[:from]
-    clone_db
+    #clone_db
+    rsync_public("system")
   end
 end
