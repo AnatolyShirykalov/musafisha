@@ -10,8 +10,8 @@ gem 'rails', '5.2.3'
 gem 'sass'
 
 gem 'paper_trail-association_tracking' # need for rocket_cms
-gem 'rails_admin'
-gem 'rocket_cms_activerecord'
+gem 'rails_admin', '>= 1.4.2'
+gem 'rocket_cms_activerecord', '>= 0.27.8'
 
 gem 'bootstrap4-kaminari-views'
 gem 'haml'
