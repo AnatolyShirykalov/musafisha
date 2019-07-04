@@ -5,7 +5,9 @@
   "private": true,
   "repository": "git@rscz.ru:rocket-science/musafisha.git",
   "scripts": {
-    "start": "webpack-dev-server --config config/webpack.config.js --hot --inline"
+    "start": "webpack-dev-server --config config/webpack.config.js --hot --inline",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "autoprefixer": "^7.1.1",
@@ -44,6 +46,8 @@
     "url-loader": "^0.5.7",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.3.0",
-    "webpack-hot-middleware": "^2.7.1"
-  }
+    "webpack-hot-middleware": "^2.7.1",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
