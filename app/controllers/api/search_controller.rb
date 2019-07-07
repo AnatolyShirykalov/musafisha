@@ -11,6 +11,10 @@ class Api::SearchController < ApiController
     render json: model_data(Ohmymusic::Performer)
   end
 
+  def halls
+    render json: model_data(Hall, match: :word_start)
+  end
+
   def index
     render json: {
       composers: model_data(Ohmymusic::Composer),
@@ -21,7 +25,10 @@ class Api::SearchController < ApiController
 
   private
 
-  def model_data(model)
-    model.search(params[:q], page: params[:page] || 1, per_page: params[:per_page] || 10)
+  def model_data(model, options = {} )
+    model.search(params[:q], {
+      page: params[:page] || 1,
+      per_page: params[:per_page] || 10,
+    }).merge(options)
   end
 end

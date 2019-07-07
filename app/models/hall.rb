@@ -24,6 +24,7 @@
 class Hall < ApplicationRecord
   include Geocodeable
   has_many :concerts
+  searchkick word_start: [:name]
 
   has_attached_file :icon
   validates_attachment_content_type :icon, content_type: /\Aimage\/.*\Z/
