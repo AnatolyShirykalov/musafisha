@@ -72,3 +72,5 @@ gem "irb", "~> 1.0"
 gem "searchkick", "~> 3.1"
 
 gem "acts-as-taggable-on", "~> 6.0"
+
+gem "whenever", "~> 1.0"
