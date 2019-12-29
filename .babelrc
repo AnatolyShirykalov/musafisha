@@ -1,5 +1,39 @@
 {
-  "presets": ["es2015", "stage-0"],
-  "plugins": []
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "browsers": [
+            "last 6 versions",
+            "ie >= 9"
+          ]
+        },
+        "modules": false,
+        "corejs": 2,
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-function-bind",
+    "@babel/plugin-transform-regenerator",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": false
+      }
+    ],
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": false,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ]
+  ]
 }
-

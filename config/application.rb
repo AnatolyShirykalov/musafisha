@@ -39,6 +39,12 @@ module Musafisha
 
     config.time_zone = 'Europe/Moscow'
     config.assets.paths << Rails.root.join(*%w[app assets fonts])
+
+    config.webpack.dev_server.manifest_port = ENV["WEBPACK_DEV_PORT"] || 3808
+    config.webpack.dev_server.host = proc { respond_to?(:request) ? request.host : 'localhost' }
+    config.webpack.dev_server.port = ENV["WEBPACK_DEV_PORT"] || 3808
+    config.webpack.manifest_type = 'manifest'
+    config.webpack.dev_server.enabled = ::Rails.env.development?
   end
 end
 

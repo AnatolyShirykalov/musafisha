@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'aasm'
 gem 'pg'
 gem 'pg_search'
-gem 'rails', '5.2.3'
+gem 'rails'
 
 gem 'sass'
 
@@ -19,7 +19,7 @@ gem 'slim'
 gem 'slim-rails'
 
 gem 'sass-rails'
-gem 'webpack-rails'
+gem 'rs-webpack-rails'
 
 gem 'cancancan'
 gem 'dalli'
@@ -67,10 +67,12 @@ group :test do
   gem 'ffaker'
 end
 
-gem "irb", "~> 1.0"
+gem "irb"
 
-gem "searchkick", "~> 3.1"
+gem "searchkick"
 
-gem "acts-as-taggable-on", "~> 6.0"
+gem "acts-as-taggable-on"
 
-gem "whenever", "~> 1.0"
+gem "whenever"
+
+gem "paperclip", "~> 6.1"
