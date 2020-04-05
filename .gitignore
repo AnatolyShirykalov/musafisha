@@ -15,3 +15,5 @@
 /public/webpack
 /config/database.yml
 /config/secrets.yml
+/pyenv
+/db/structure.sql

@@ -22,6 +22,13 @@ class Api::SearchController < ApiController
   private
 
   def model_data(model)
-    model.search(params[:q], page: params[:page] || 1, per_page: params[:per_page] || 10)
+    model.search(
+      params[:q],
+      where: params[:where].presence,
+      match: :word_start,
+      misspellings: { below: 5 },
+      page: params[:page] || 1,
+      per_page: params[:per_page] || 10,
+    )
   end
 end

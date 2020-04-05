@@ -10,7 +10,7 @@ gem 'rails'
 gem 'sass'
 
 gem 'paper_trail-association_tracking' # need for rocket_cms
-gem 'rails_admin'
+gem 'rails_admin' 
 gem 'rocket_cms_activerecord'
 
 gem 'bootstrap4-kaminari-views'
@@ -76,3 +76,5 @@ gem "acts-as-taggable-on"
 gem "whenever"
 
 gem "paperclip", "~> 6.1"
+
+gem "pycall", "~> 1.2"
