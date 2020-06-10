@@ -154,7 +154,7 @@ GEM
     ffi (1.11.3)
     friendly_id (5.3.0)
       activerecord (>= 4.0.0)
-    geocoder (1.5.2)
+    geocoder (1.6.3)
     glebtv-ckeditor (4.13.1)
       orm_adapter (~> 0.5.0)
       terrapin
