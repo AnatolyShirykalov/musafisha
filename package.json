@@ -34,7 +34,7 @@
     "jquery": "^3.4.1",
     "js-cookie": "^2.2.1",
     "magnific-popup": "^1.1.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "popper.js": "^1.16.0",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-functions": "^3.0.0",
