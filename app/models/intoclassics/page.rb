@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: intoclassics_pages
+#
+#  id         :bigint           not null, primary key
+#  title      :string
+#  h1         :string
+#  slug       :string
+#  content    :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# Indexes
+#
+#  index_intoclassics_pages_on_slug  (slug) UNIQUE
+#
 class Intoclassics::Page < ApplicationRecord
   #searchkick
   has_many :links, dependent: :destroy

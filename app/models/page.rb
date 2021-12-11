@@ -17,6 +17,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_pages_on_enabled_and_lft  (enabled,lft)
+#  index_pages_on_slug             (slug) UNIQUE
+#
 
 class Page < ApplicationRecord
   include RocketCMS::Models::Page

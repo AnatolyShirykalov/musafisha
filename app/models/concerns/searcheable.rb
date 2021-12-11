@@ -1,7 +1,7 @@
 module Searcheable
   extend ActiveSupport::Concern
   included do
-    include PgSearch
+    include PgSearch::Model
     pg_search_scope :search, {
       against: :alltext,
       using: {

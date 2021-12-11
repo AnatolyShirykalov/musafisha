@@ -31,7 +31,7 @@ gem 'omniauth-vkontakte'
 gem 'omniauth-google-oauth2'
 
 gem 'cloner'
-gem 'puma', github: 'AnatolyShirykalov/puma'
+gem 'puma', github: 'AnatolyShirykalov/puma', branch: '4.3.8'
 
 gem 'sentry-raven'
 gem 'x-real-ip'
