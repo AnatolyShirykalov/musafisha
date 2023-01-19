@@ -121,7 +121,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     crass (1.0.6)
     dalli (3.1.1)
     database_cleaner (2.0.1)
@@ -187,7 +187,7 @@ GEM
       orm_adapter (~> 0.5.0)
       terrapin
     glebtv-simple_captcha (0.8.1)
-    globalid (1.0.0)
+    globalid (1.0.1)
       activesupport (>= 5.0)
     haml (5.2.2)
       temple (>= 0.8.0)
@@ -246,7 +246,7 @@ GEM
       nokogiri (~> 1)
       rake
     mini_mime (1.1.2)
-    minitest (5.14.4)
+    minitest (5.17.0)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -475,7 +475,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     thor (1.1.0)
     tilt (2.0.10)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
@@ -494,7 +494,7 @@ GEM
     x-real-ip (0.2.1)
       activesupport
       rack
-    zeitwerk (2.5.1)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   x86_64-linux
